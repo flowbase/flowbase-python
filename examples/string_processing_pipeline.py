@@ -1,27 +1,27 @@
 import asyncio
-
+import flowbase
 
 def main():
-    loop = asyncio.get_event_loop()
+    net = flowbase.Network()
 
     # Initialize components
     hisayer = HiSayer()
-    loop.create_task(hisayer.run())
+    net.add_process('hisayer', hisayer)
 
     splitter = StringSplitter()
-    loop.create_task(splitter.run())
+    net.add_process('hisayer', splitter)
 
     lowercaser = LowerCaser()
-    loop.create_task(lowercaser.run())
+    net.add_process('hisayer', lowercaser)
 
     uppercaser = UpperCaser()
-    loop.create_task(uppercaser.run())
+    net.add_process('hisayer', uppercaser)
 
     stringjoiner = StringJoiner()
-    loop.create_task(stringjoiner.run())
+    net.add_process('hisayer', stringjoiner)
 
     printer = Printer()
-    loop.create_task(printer.run())
+    net.add_process('hisayer', printer)
 
     # Connect network
     splitter.in_lines = hisayer.out_lines
@@ -32,7 +32,7 @@ def main():
     printer.in_lines = stringjoiner.out_lines
 
     # Run the full event loop
-    loop.run_until_complete(printer.run())
+    net.run()
 
 
 class HiSayer:
