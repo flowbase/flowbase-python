@@ -4,7 +4,7 @@ Python implementation of the [FlowBase micro-FBP framework
 idea](https://flowbase.org), using Python's asyncio library, introduced in
 Python 3.4/3.5.
 
-# Installation
+## Installation
 
 ```bash
 git clone git@github.com:flowbase/flowbase-python.git
@@ -12,14 +12,14 @@ cd flowbase-python
 pip install .
 ```
 
-# Try an example
+## Try an example
 
 ```
 cd examples
 python string_processing_pipeline.py
 ```
 
-## Expected output:
+### Expected output:
 
 ```bash
 $ python string_processing_pipeline.py
@@ -45,7 +45,7 @@ Printer got line: hi hi for the 19:TH TIME...
 Printer got line: hi hi for the 20:TH TIME...
 ```
 
-# Acknowledgements
+## Acknowledgements
 
 Kudos to [Simone Baffelli](https://github.com/baffelli)'s
 [Pyperator](https://github.com/baffelli/pyperator/) library which showed that
