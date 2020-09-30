@@ -1,4 +1,4 @@
-# FlowBase python
+# FlowBase-Python
 
 Python implementation of the [FlowBase micro-FBP framework
 idea](https://flowbase.org), using Python's asyncio library, introduced in
