@@ -25,19 +25,19 @@ def main():
     net.add_process("hisayer", printer)
 
     # Connect network
-    splitter.in_lines = hisayer.out_lines
-    lowercaser.in_lines = splitter.out_leftpart
-    uppercaser.in_lines = splitter.out_rightpart
-    stringjoiner.in_leftpart = lowercaser.out_lines
-    stringjoiner.in_rightpart = uppercaser.out_lines
-    printer.in_lines = stringjoiner.out_lines
+    splitter.in_lines.connect_from(hisayer.out_lines)
+    lowercaser.in_lines.connect_from(splitter.out_leftpart)
+    uppercaser.in_lines.connect_from(splitter.out_rightpart)
+    stringjoiner.in_leftpart.connect_from(lowercaser.out_lines)
+    stringjoiner.in_rightpart.connect_from(uppercaser.out_lines)
+    printer.in_lines.connect_from(stringjoiner.out_lines)
 
     # Run the full event loop
     net.run()
 
 
 class HiSayer:
-    out_lines = asyncio.Queue()
+    out_lines = flowbase.OutPort()
 
     async def run(self):
         for i in range(20):
@@ -45,9 +45,9 @@ class HiSayer:
 
 
 class StringSplitter:
-    in_lines = asyncio.Queue()
-    out_leftpart = asyncio.Queue()
-    out_rightpart = asyncio.Queue()
+    in_lines = flowbase.InPort()
+    out_leftpart = flowbase.OutPort()
+    out_rightpart = flowbase.OutPort()
 
     async def run(self):
         while not self.in_lines.empty():
@@ -57,8 +57,8 @@ class StringSplitter:
 
 
 class LowerCaser:
-    in_lines = asyncio.Queue()
-    out_lines = asyncio.Queue()
+    in_lines = flowbase.InPort()
+    out_lines = flowbase.OutPort()
 
     async def run(self):
         while not self.in_lines.empty():
@@ -67,8 +67,8 @@ class LowerCaser:
 
 
 class UpperCaser:
-    in_lines = asyncio.Queue()
-    out_lines = asyncio.Queue()
+    in_lines = flowbase.InPort()
+    out_lines = flowbase.OutPort()
 
     async def run(self):
         while not self.in_lines.empty():
@@ -77,9 +77,9 @@ class UpperCaser:
 
 
 class StringJoiner:
-    in_leftpart = asyncio.Queue()
-    in_rightpart = asyncio.Queue()
-    out_lines = asyncio.Queue()
+    in_leftpart = flowbase.InPort()
+    in_rightpart = flowbase.InPort()
+    out_lines = flowbase.OutPort()
 
     async def run(self):
         while not self.in_leftpart.empty() or not self.in_rightpart.empty():
@@ -89,7 +89,7 @@ class StringJoiner:
 
 
 class Printer:
-    in_lines = asyncio.Queue()
+    in_lines = flowbase.InPort()
 
     async def run(self):
         while not self.in_lines.empty():

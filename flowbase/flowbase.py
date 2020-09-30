@@ -27,3 +27,27 @@ class Network(Process):
 
     def run(self):
         self._loop.run_until_complete(self._driver_process.run())
+
+
+class Port:
+    _queue = asyncio.Queue()
+
+    def empty(self):
+        if self._queue is None:
+            raise Error('Queue was None')
+        return self._queue.empty()
+
+
+class OutPort(Port):
+    async def put(self, item):
+        await self._queue.put(item)
+
+
+class InPort(Port):
+    _queue = None
+
+    async def get(self):
+        return await self._queue.get()
+
+    def connect_from(self, out_port: OutPort):
+        self._queue = out_port._queue
