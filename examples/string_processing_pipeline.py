@@ -1,27 +1,28 @@
 import asyncio
 import flowbase
 
+
 def main():
     net = flowbase.Network()
 
     # Initialize components
     hisayer = HiSayer()
-    net.add_process('hisayer', hisayer)
+    net.add_process("hisayer", hisayer)
 
     splitter = StringSplitter()
-    net.add_process('hisayer', splitter)
+    net.add_process("hisayer", splitter)
 
     lowercaser = LowerCaser()
-    net.add_process('hisayer', lowercaser)
+    net.add_process("hisayer", lowercaser)
 
     uppercaser = UpperCaser()
-    net.add_process('hisayer', uppercaser)
+    net.add_process("hisayer", uppercaser)
 
     stringjoiner = StringJoiner()
-    net.add_process('hisayer', stringjoiner)
+    net.add_process("hisayer", stringjoiner)
 
     printer = Printer()
-    net.add_process('hisayer', printer)
+    net.add_process("hisayer", printer)
 
     # Connect network
     splitter.in_lines = hisayer.out_lines

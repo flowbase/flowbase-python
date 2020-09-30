@@ -1,13 +1,16 @@
-'''
+"""
 Copyright (c) 2020 Samuel Lampa <samuel.lampa@rilnet.com>
-'''
+"""
 
 import asyncio
 import typing
 
+
 class Process:
     def run(self):
-        raise NotImplementedError(f'str(type(self)) can not be used directly, but must be subclassed')
+        raise NotImplementedError(
+            f"str(type(self)) can not be used directly, but must be subclassed"
+        )
 
 
 class Network(Process):
