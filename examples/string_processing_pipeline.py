@@ -40,8 +40,7 @@ class HiSayer:
 
     async def run(self):
         for i in range(20):
-            self.out_lines.put_nowait(f"Hi hi for the {i+1}:th time...")
-            self.out_lines.task_done()
+            await self.out_lines.put(f"Hi hi for the {i+1}:th time...")
 
 
 class StringSplitter:
@@ -52,8 +51,8 @@ class StringSplitter:
     async def run(self):
         while not self.in_lines.empty():
             s = await self.in_lines.get()
-            self.out_leftpart.put_nowait(s[: int(len(s) / 2)])
-            self.out_rightpart.put_nowait(s[int(len(s) / 2) :])
+            await self.out_leftpart.put(s[: int(len(s) / 2)])
+            await self.out_rightpart.put(s[int(len(s) / 2) :])
 
 
 class LowerCaser:
@@ -63,7 +62,7 @@ class LowerCaser:
     async def run(self):
         while not self.in_lines.empty():
             s = await self.in_lines.get()
-            self.out_lines.put_nowait(s.lower())
+            await self.out_lines.put(s.lower())
 
 
 class UpperCaser:
@@ -73,7 +72,7 @@ class UpperCaser:
     async def run(self):
         while not self.in_lines.empty():
             s = await self.in_lines.get()
-            self.out_lines.put_nowait(s.upper())
+            await self.out_lines.put(s.upper())
 
 
 class StringJoiner:
@@ -85,7 +84,7 @@ class StringJoiner:
         while not self.in_leftpart.empty() or not self.in_rightpart.empty():
             leftpart = await self.in_leftpart.get()
             rightpart = await self.in_rightpart.get()
-            self.out_lines.put_nowait(f"{leftpart}{rightpart}")
+            await self.out_lines.put(f"{leftpart}{rightpart}")
 
 
 class Printer:
