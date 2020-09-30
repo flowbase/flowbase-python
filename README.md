@@ -7,9 +7,7 @@ Python 3.4/3.5.
 ## Installation
 
 ```bash
-git clone git@github.com:flowbase/flowbase-python.git
-cd flowbase-python
-pip install .
+pip install flowbase
 ```
 
 ## Try an example
