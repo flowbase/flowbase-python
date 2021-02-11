@@ -1,1 +1,1 @@
-from flowbase.flowbase import Process, Network
+from flowbase.flowbase import Process, Network, Port

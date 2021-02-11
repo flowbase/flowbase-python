@@ -1,4 +1,3 @@
-import asyncio
 import flowbase
 
 
@@ -37,7 +36,7 @@ def main():
 
 
 class HiSayer:
-    out_lines = asyncio.Queue()
+    out_lines = flowbase.Port()
 
     async def run(self):
         for i in range(20):
@@ -45,9 +44,9 @@ class HiSayer:
 
 
 class StringSplitter:
-    in_lines = asyncio.Queue()
-    out_leftpart = asyncio.Queue()
-    out_rightpart = asyncio.Queue()
+    in_lines = flowbase.Port()
+    out_leftpart = flowbase.Port()
+    out_rightpart = flowbase.Port()
 
     async def run(self):
         while not self.in_lines.empty():
@@ -57,8 +56,8 @@ class StringSplitter:
 
 
 class LowerCaser:
-    in_lines = asyncio.Queue()
-    out_lines = asyncio.Queue()
+    in_lines = flowbase.Port()
+    out_lines = flowbase.Port()
 
     async def run(self):
         while not self.in_lines.empty():
@@ -67,8 +66,8 @@ class LowerCaser:
 
 
 class UpperCaser:
-    in_lines = asyncio.Queue()
-    out_lines = asyncio.Queue()
+    in_lines = flowbase.Port()
+    out_lines = flowbase.Port()
 
     async def run(self):
         while not self.in_lines.empty():
@@ -77,9 +76,9 @@ class UpperCaser:
 
 
 class StringJoiner:
-    in_leftpart = asyncio.Queue()
-    in_rightpart = asyncio.Queue()
-    out_lines = asyncio.Queue()
+    in_leftpart = flowbase.Port()
+    in_rightpart = flowbase.Port()
+    out_lines = flowbase.Port()
 
     async def run(self):
         while not self.in_leftpart.empty() or not self.in_rightpart.empty():
@@ -89,7 +88,7 @@ class StringJoiner:
 
 
 class Printer:
-    in_lines = asyncio.Queue()
+    in_lines = flowbase.Port()
 
     async def run(self):
         while not self.in_lines.empty():

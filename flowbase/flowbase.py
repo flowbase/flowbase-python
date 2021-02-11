@@ -27,3 +27,7 @@ class Network(Process):
 
     def run(self):
         self._loop.run_until_complete(self._driver_process.run())
+
+
+class Port(asyncio.Queue):
+    pass
