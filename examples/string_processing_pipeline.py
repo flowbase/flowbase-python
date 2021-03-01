@@ -1,7 +1,7 @@
 import flowbase
 
 
-def main():
+async def main():
     net = flowbase.Network()
 
     # Initialize components
@@ -32,7 +32,7 @@ def main():
     printer.in_lines = stringjoiner.out_lines
 
     # Run the full event loop
-    net.run()
+    await net.run()
 
 
 class HiSayer:
@@ -97,4 +97,4 @@ class Printer:
 
 
 if __name__ == "__main__":
-    main()
+    flowbase.run(main(), debug=True)

@@ -11,7 +11,7 @@ with open("README.md") as fh:
 
 setup(
     name="flowbase",
-    version="0.0.2",
+    version="0.0.3",
     description="Python implementation of the FlowBase Flow-based Programming micro-framework idea (see flowbase.org)",
     long_description=long_description,
     long_description_content_type="text/markdown",
